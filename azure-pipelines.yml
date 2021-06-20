@@ -10,3 +10,16 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
+- task: AzureResourceManagerTemplateDeployment@3
+  inputs:
+    deploymentScope: 'Resource Group'
+    azureResourceManagerConnection: 'AzureRmPipeline-conn'
+    subscriptionId: 'ebf20c2a-f8ec-46bb-8f90-1b7ce94781b8'
+    action: 'Create Or Update Resource Group'
+    resourceGroupName: 'AzureRmPipeline-rg'
+    location: 'East US'
+    templateLocation: 'URL of the file'
+    csmFileLink: 'https://raw.githubusercontent.com/manmohanbatra/AzureRmPipeline-repo/main/CreateWebApp/azuredeploy.json'
+    overrideParameters: '-projectName Azurepipeline'
+    deploymentMode: 'Incremental'
+    deploymentName: 'DeployPipelineTemplate'
